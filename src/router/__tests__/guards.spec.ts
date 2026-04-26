@@ -4,6 +4,15 @@ import { createRouter, createMemoryHistory } from 'vue-router'
 import { routes } from '../routes'
 import { applyGuards } from '../guards'
 import { useAuthStore } from '@/stores/auth'
+import type { User } from '@/types/auth'
+
+const stubUser: User = {
+  id: 1,
+  email: 'test@example.com',
+  name: 'Test',
+  role: 'user',
+  created_at: '2024-01-01T00:00:00.000Z',
+}
 
 function buildRouter() {
   const router = createRouter({
@@ -40,7 +49,7 @@ describe('router navigation guards', () => {
 
   it('redirects authenticated user away from /login to /dashboard', async () => {
     const authStore = useAuthStore()
-    authStore.setToken('test-token')
+    authStore.login('test-token', stubUser)
 
     const router = buildRouter()
     await router.push('/login')
@@ -49,7 +58,7 @@ describe('router navigation guards', () => {
 
   it('redirects authenticated user away from /register to /dashboard', async () => {
     const authStore = useAuthStore()
-    authStore.setToken('test-token')
+    authStore.login('test-token', stubUser)
 
     const router = buildRouter()
     await router.push('/register')
@@ -58,7 +67,7 @@ describe('router navigation guards', () => {
 
   it('allows authenticated user to access /dashboard', async () => {
     const authStore = useAuthStore()
-    authStore.setToken('test-token')
+    authStore.login('test-token', stubUser)
 
     const router = buildRouter()
     await router.push('/dashboard')
@@ -67,7 +76,7 @@ describe('router navigation guards', () => {
 
   it('allows authenticated user to access /exercises', async () => {
     const authStore = useAuthStore()
-    authStore.setToken('test-token')
+    authStore.login('test-token', stubUser)
 
     const router = buildRouter()
     await router.push('/exercises')
@@ -76,7 +85,7 @@ describe('router navigation guards', () => {
 
   it('allows authenticated user to access /workout-sessions', async () => {
     const authStore = useAuthStore()
-    authStore.setToken('test-token')
+    authStore.login('test-token', stubUser)
 
     const router = buildRouter()
     await router.push('/workout-sessions')
@@ -85,7 +94,7 @@ describe('router navigation guards', () => {
 
   it('allows authenticated user to access /workout-plans', async () => {
     const authStore = useAuthStore()
-    authStore.setToken('test-token')
+    authStore.login('test-token', stubUser)
 
     const router = buildRouter()
     await router.push('/workout-plans')
@@ -112,7 +121,7 @@ describe('router navigation guards', () => {
 
   it('sets route meta title for dashboard', async () => {
     const authStore = useAuthStore()
-    authStore.setToken('test-token')
+    authStore.login('test-token', stubUser)
 
     const router = buildRouter()
     await router.push('/dashboard')
@@ -121,7 +130,7 @@ describe('router navigation guards', () => {
 
   it('sets route meta title for exercises', async () => {
     const authStore = useAuthStore()
-    authStore.setToken('test-token')
+    authStore.login('test-token', stubUser)
 
     const router = buildRouter()
     await router.push('/exercises')
