@@ -20,10 +20,4 @@ app.use(createPinia())
 app.use(router)
 app.use(VueQueryPlugin, { queryClient })
 
-if (import.meta.env.DEV) {
-  import('@tanstack/vue-query-devtools').then(({ VueQueryDevtools }) => {
-    app.use(VueQueryDevtools)
-  })
-}
-
 app.mount('#app')
