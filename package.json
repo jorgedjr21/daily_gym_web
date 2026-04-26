@@ -35,6 +35,9 @@
     "zod": "^3.24.4"
   },
   "devDependencies": {
+    "@tanstack/vue-query-devtools": "^6.1.24",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/vue": "^8.1.0",
     "@types/node": "^24.12.2",
     "@typescript-eslint/eslint-plugin": "^8.33.0",
     "@typescript-eslint/parser": "^8.33.0",
@@ -45,8 +48,6 @@
     "autoprefixer": "^10.4.21",
     "eslint": "^9.27.0",
     "eslint-plugin-vue": "^9.33.0",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/vue": "^8.1.0",
     "jsdom": "^26.1.0",
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
