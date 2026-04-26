@@ -44,7 +44,7 @@ function buildGlobalConfig() {
   const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } })
 
   return {
-    plugins: [pinia, router, [VueQueryPlugin, { queryClient }]],
+    plugins: [pinia, router, [VueQueryPlugin, { queryClient }] as [typeof VueQueryPlugin, { queryClient: QueryClient }]],
   }
 }
 
