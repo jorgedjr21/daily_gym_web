@@ -1,14 +1,20 @@
 import { api } from '@/lib/api'
-import type { User, LoginPayload } from '@/types/auth'
+import type { User, LoginPayload, RegisterPayload } from '@/types/auth'
 
-interface LoginResponse {
+interface AuthResponse {
   token: string
   user: User
 }
 
 export const authService = {
   login: (payload: LoginPayload) =>
-    api.post<LoginResponse>('/users/sign_in', { user: payload }).then((r) => ({
+    api.post<AuthResponse>('/users/sign_in', { user: payload }).then((r) => ({
+      token: r.headers['authorization'] as string,
+      user: r.data.user,
+    })),
+
+  register: (payload: RegisterPayload) =>
+    api.post<AuthResponse>('/users', { user: payload }).then((r) => ({
       token: r.headers['authorization'] as string,
       user: r.data.user,
     })),
