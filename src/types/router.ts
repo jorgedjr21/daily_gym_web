@@ -5,6 +5,7 @@ export type RouteName =
   | 'exercises'
   | 'workout-sessions'
   | 'workout-plans'
+  | 'workout-plan-new'
 
 declare module 'vue-router' {
   interface RouteMeta {
