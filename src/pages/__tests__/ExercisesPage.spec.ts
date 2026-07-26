@@ -125,7 +125,7 @@ describe('ExercisesPage', () => {
 
   describe('search', () => {
     beforeEach(() => {
-      vi.useFakeTimers({ shouldAdvanceTime: true })
+      vi.useFakeTimers()
     })
 
     afterEach(() => {
