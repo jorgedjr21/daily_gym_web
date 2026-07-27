@@ -143,6 +143,21 @@ describe('router navigation guards', () => {
     expect(router.currentRoute.value.name).toBe('login')
   })
 
+  it('allows authenticated user to access /workout-plans/new', async () => {
+    const authStore = useAuthStore()
+    authStore.login('test-token', stubUser)
+
+    const router = buildRouter()
+    await router.push('/workout-plans/new')
+    expect(router.currentRoute.value.name).toBe('workout-plan-new')
+  })
+
+  it('redirects unauthenticated user from /workout-plans/new to /login', async () => {
+    const router = buildRouter()
+    await router.push('/workout-plans/new')
+    expect(router.currentRoute.value.name).toBe('login')
+  })
+
   it('sets route meta title for dashboard', async () => {
     const authStore = useAuthStore()
     authStore.login('test-token', stubUser)
