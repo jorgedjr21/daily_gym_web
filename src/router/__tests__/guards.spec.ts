@@ -83,6 +83,15 @@ describe('router navigation guards', () => {
     expect(router.currentRoute.value.name).toBe('exercises')
   })
 
+  it('allows authenticated user to access /exercises/:id', async () => {
+    const authStore = useAuthStore()
+    authStore.login('test-token', stubUser)
+
+    const router = buildRouter()
+    await router.push('/exercises/1')
+    expect(router.currentRoute.value.name).toBe('exercise-details')
+  })
+
   it('allows authenticated user to access /workout-sessions', async () => {
     const authStore = useAuthStore()
     authStore.login('test-token', stubUser)

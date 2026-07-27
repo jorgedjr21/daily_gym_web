@@ -3,6 +3,7 @@ export type RouteName =
   | 'register'
   | 'dashboard'
   | 'exercises'
+  | 'exercise-details'
   | 'workout-sessions'
   | 'workout-session-new'
   | 'workout-plans'

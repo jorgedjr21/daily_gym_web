@@ -18,4 +18,6 @@ export const authService = {
       token: r.headers['authorization'] as string,
       user: r.data.user,
     })),
+
+  logout: () => api.delete('/users/sign_out').then(() => undefined),
 }

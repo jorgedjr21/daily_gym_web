@@ -81,13 +81,23 @@ All commands run inside a `node:22-alpine` container. Never run npm directly on 
 - Test files live next to the code they test inside a `__tests__/` directory.
 - Prefer `@vue/test-utils` `mount()` for component unit tests; use `@testing-library/vue` `render()` + `screen` queries for user-facing behaviour tests.
 - Never merge with failing tests (`vitest run` must exit 0).
+- `vitest.config.ts` excludes the `e2e/` directory so unit and e2e runs never collide.
+
+## End-to-End Testing (Playwright)
+
+- E2E specs live in `e2e/` (kept separate from Vitest's `src/**/__tests__` unit tests).
+- `npm run test:e2e` builds the app and runs the suite against `vite preview` (`playwright.config.ts` starts/stops the preview server automatically via `webServer`).
+- `npm run test:e2e:ui` opens the Playwright UI runner for local debugging (assumes the preview server is already reachable or built).
+- Chromium only for now (`projects` in `playwright.config.ts`), to keep CI fast.
+- CI job `e2e` in `.github/workflows/ci.yml` caches the downloaded Chromium browser under `~/.cache/ms-playwright` and uploads the HTML report as an artifact on every run.
 
 ## Key Config Files
 
 | File | Purpose |
 |---|---|
 | `vite.config.ts` | Vite build config; sets `@` alias to `./src` |
-| `vitest.config.ts` | Vitest config; jsdom env, globals, setup file, v8 coverage |
+| `vitest.config.ts` | Vitest config; jsdom env, globals, setup file, v8 coverage, excludes `e2e/` |
+| `playwright.config.ts` | Playwright config; chromium-only project, `baseURL` pointing at `vite preview` (port 4173), auto-managed `webServer` |
 | `tailwind.config.ts` | Tailwind theme extending with CSS var-based design tokens; dark mode via `class` |
 | `tsconfig.app.json` | Strict TypeScript config for `src/`; `@/*` path alias |
 | `eslint.config.js` | Flat ESLint config; `no-explicit-any` and `no-unused-vars` are errors |
