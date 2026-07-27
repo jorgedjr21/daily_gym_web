@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { RouterView } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import { useLogoutMutation } from '@/composables/useLogoutMutation'
 import Button from '@/components/ui/Button.vue'
@@ -29,7 +30,7 @@ const { mutate: logout, isPending: isLoggingOut } = useLogoutMutation()
       </div>
     </header>
     <main class="mx-auto max-w-5xl p-4">
-      <slot />
+      <RouterView />
     </main>
   </div>
 </template>
