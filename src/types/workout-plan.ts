@@ -1,11 +1,4 @@
-export interface WorkoutSessionExercise {
-  id: number
-  exercise_id: number
-  sets: number
-  reps: number
-  technique: string | null
-  current_weight: number | null
-}
+import type { WorkoutSessionExercise } from '@/types/workout-session'
 
 export interface WorkoutPlanSession {
   id: number
@@ -40,4 +33,5 @@ export interface WorkoutPlansResponse {
 
 export interface WorkoutPlansQueryParams {
   page?: number
+  per_page?: number
 }
