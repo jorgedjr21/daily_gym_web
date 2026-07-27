@@ -20,7 +20,7 @@ describe('Table', () => {
           </TableHeader>
           <TableBody>
             <TableRow>
-              <TableCell>Push Day</TableCell>
+              <TableCell>Push-ups</TableCell>
             </TableRow>
           </TableBody>
         </Table>
@@ -29,6 +29,6 @@ describe('Table', () => {
 
     expect(wrapper.find('table').exists()).toBe(true)
     expect(wrapper.find('thead th').text()).toBe('Name')
-    expect(wrapper.find('tbody td').text()).toBe('Push Day')
+    expect(wrapper.find('tbody td').text()).toBe('Push-ups')
   })
 })

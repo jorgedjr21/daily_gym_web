@@ -14,6 +14,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
+    "test:e2e": "npm run build && playwright test",
+    "test:e2e:ui": "playwright test --ui",
     "typecheck": "vue-tsc -b --noEmit",
     "type-check": "vue-tsc --noEmit",
     "lint": "eslint src",
@@ -37,6 +39,7 @@
     "zod": "^3.24.4"
   },
   "devDependencies": {
+    "@playwright/test": "^1.62.0",
     "@tanstack/vue-query-devtools": "^6.1.24",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/vue": "^8.1.0",
