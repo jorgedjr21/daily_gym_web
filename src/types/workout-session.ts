@@ -12,6 +12,10 @@ export interface WorkoutSession {
   name: string
   user_id: number
   workout_session_exercises: WorkoutSessionExercise[]
+  // Not returned by the API yet (WorkoutSessionBlueprint only exposes id, name,
+  // user_id and workout_session_exercises). Kept optional so the UI can render
+  // it once the backend starts serializing the session's creation date.
+  created_at?: string
 }
 
 export interface PaginationMeta {

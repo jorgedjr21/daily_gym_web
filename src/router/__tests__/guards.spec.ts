@@ -83,6 +83,15 @@ describe('router navigation guards', () => {
     expect(router.currentRoute.value.name).toBe('exercises')
   })
 
+  it('allows authenticated user to access /exercises/:id', async () => {
+    const authStore = useAuthStore()
+    authStore.login('test-token', stubUser)
+
+    const router = buildRouter()
+    await router.push('/exercises/1')
+    expect(router.currentRoute.value.name).toBe('exercise-details')
+  })
+
   it('allows authenticated user to access /workout-sessions', async () => {
     const authStore = useAuthStore()
     authStore.login('test-token', stubUser)
@@ -90,6 +99,15 @@ describe('router navigation guards', () => {
     const router = buildRouter()
     await router.push('/workout-sessions')
     expect(router.currentRoute.value.name).toBe('workout-sessions')
+  })
+
+  it('allows authenticated user to access /workout-sessions/new', async () => {
+    const authStore = useAuthStore()
+    authStore.login('test-token', stubUser)
+
+    const router = buildRouter()
+    await router.push('/workout-sessions/new')
+    expect(router.currentRoute.value.name).toBe('workout-session-new')
   })
 
   it('allows authenticated user to access /workout-plans', async () => {
@@ -113,9 +131,30 @@ describe('router navigation guards', () => {
     expect(router.currentRoute.value.name).toBe('login')
   })
 
+  it('redirects unauthenticated user from /workout-sessions/new to /login', async () => {
+    const router = buildRouter()
+    await router.push('/workout-sessions/new')
+    expect(router.currentRoute.value.name).toBe('login')
+  })
+
   it('redirects unauthenticated user from /workout-plans to /login', async () => {
     const router = buildRouter()
     await router.push('/workout-plans')
+    expect(router.currentRoute.value.name).toBe('login')
+  })
+
+  it('allows authenticated user to access /workout-plans/new', async () => {
+    const authStore = useAuthStore()
+    authStore.login('test-token', stubUser)
+
+    const router = buildRouter()
+    await router.push('/workout-plans/new')
+    expect(router.currentRoute.value.name).toBe('workout-plan-new')
+  })
+
+  it('redirects unauthenticated user from /workout-plans/new to /login', async () => {
+    const router = buildRouter()
+    await router.push('/workout-plans/new')
     expect(router.currentRoute.value.name).toBe('login')
   })
 
